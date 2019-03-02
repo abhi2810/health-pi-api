@@ -35,7 +35,7 @@ def predict():
     parameters.append(flask.request.args.get('temp'))
     parameters.append(flask.request.args.get('hr'))
     parameters.append(flask.request.args.get('bmi'))
-    if not parameters[0] :
+    if parameters[0] :
         inputFeature = np.asarray(parameters).reshape(1, 3)
         with graph.as_default():
             raw_prediction = model.predict(inputFeature)[0][0]
