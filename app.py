@@ -5,6 +5,7 @@ import tensorflow as tf
 from keras.models import model_from_json
 
 app = Flask(__name__)
+model,graph
 def init():
     global model,graph
     # load the pre-trained Keras model
@@ -28,11 +29,11 @@ def homepage():
 @app.route("/predict", methods=["GET","POST"])
 def predict():
     inputFeature = np.asarray([99,80,21]).reshape(1, 3)
-    raw_prediction = model.predict(inputFeature)[0][0]
+    with graph.as_default():
+        raw_prediction = model.predict(inputFeature)[0][0]
     data = {"success": raw_prediction}
     return jsonify(data)  
 
 if __name__ == '__main__':
-    print(("* Loading Keras model and Flask starting server...please wait until server has fully started"))
     init()
     app.run(debug=True, use_reloader=True)
