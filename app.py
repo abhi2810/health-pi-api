@@ -31,10 +31,17 @@ def homepage():
 
 @app.route("/predict", methods=["GET","POST"])
 def predict():
-    inputFeature = np.asarray([99,80,21]).reshape(1, 3)
-    with graph.as_default():
-        raw_prediction = model.predict(inputFeature)[0][0]
-    data = {"success": str(raw_prediction)}
+    parameters = []
+    parameters.append(flask.request.args.get('temp'))
+    parameters.append(flask.request.args.get('hr'))
+    parameters.append(flask.request.args.get('bmi'))
+    if len(parameters) == 3 :
+        inputFeature = np.asarray(parameters).reshape(1, 3)
+        with graph.as_default():
+            raw_prediction = model.predict(inputFeature)[0][0]
+        data = {"score": str(raw_prediction)}
+    else:
+        data = {"score": "0"}
     return jsonify(data)  
 
 if __name__ == '__main__':
