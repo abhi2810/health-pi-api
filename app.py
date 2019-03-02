@@ -34,8 +34,8 @@ def predict():
     inputFeature = np.asarray([99,80,21]).reshape(1, 3)
     with graph.as_default():
         raw_prediction = model.predict(inputFeature)[0][0]
-    data = {"success": raw_prediction}
-    return raw_prediction  
+    data = {"success": str(raw_prediction)}
+    return jsonify(data)  
 
 if __name__ == '__main__':
     init()
