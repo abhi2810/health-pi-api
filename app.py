@@ -23,8 +23,12 @@ def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
 
     return """
-    <h1>Hello heroku</h1>
+    <h1>Hello Bro!</h1>
     <p>It is currently {time}.</p>
+    <p>It is really easy to use this API.<br>
+    Just make a GET request to the url/predict with temp, hr and bmi.<br>
+    You'll get a json with the healthscore.</p>
+    <p>BTW, Enjoy this picture of a cat.</p>
     <img src="http://loremflickr.com/600/400" />
     """.format(time=the_time)
 
