@@ -35,7 +35,7 @@ def predict():
     with graph.as_default():
         raw_prediction = model.predict(inputFeature)[0][0]
     data = {"success": raw_prediction}
-    return jsonify(data)  
+    return raw_prediction  
 
 if __name__ == '__main__':
     init()
