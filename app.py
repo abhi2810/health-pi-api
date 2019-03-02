@@ -6,6 +6,12 @@ from keras.models import model_from_json
 
 app = Flask(__name__)
 model,graph
+# load the pre-trained Keras model
+with open('classifier.json', 'r') as f:
+    model = model_from_json(f.read())
+model.load_weights('classifier.h5')
+graph = tf.get_default_graph()
+
 def init():
     global model,graph
     # load the pre-trained Keras model
