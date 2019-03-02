@@ -28,8 +28,7 @@ def homepage():
 @app.route("/predict", methods=["GET","POST"])
 def predict():
     inputFeature = np.asarray([99,80,21]).reshape(1, 3)
-    with graph.as_default():
-        raw_prediction = model.predict(inputFeature)[0][0]
+    raw_prediction = model.predict(inputFeature)[0][0]
     data = {"success": raw_prediction}
     return jsonify(data)  
 
