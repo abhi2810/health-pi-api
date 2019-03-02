@@ -18,7 +18,7 @@ def homepage():
 @app.route("/predict", methods=["GET","POST"])
 def predict():
     data = {"success": False}
-    return flask.jsonify(data)  
+    return Flask.jsonify(data)  
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
