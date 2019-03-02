@@ -1,10 +1,10 @@
-from flask import Flask, jsonify
+import flask
 from datetime import datetime
 import numpy as np
 import tensorflow as tf
 from keras.models import model_from_json
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 with open('classifier.json', 'r') as f:
     model = model_from_json(f.read())
 model.load_weights('classifier.h5')
@@ -42,7 +42,7 @@ def predict():
         data = {"score": str(raw_prediction)}
     else:
         data = {"score": "0"}
-    return jsonify(data)  
+    return flask.jsonify(data)  
 
 if __name__ == '__main__':
     init()
