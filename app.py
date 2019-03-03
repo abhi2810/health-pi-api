@@ -59,6 +59,7 @@ def pistore():
         u'last': u'Lovelace',
         u'born': 1815
     })
+    return 'valid'
     
 
 @app.route("/predict", methods=["GET","POST"])
