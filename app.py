@@ -43,9 +43,12 @@ def homepage():
 @app.route("/pistore", methods=["GET","POST"])
 def pistore():
     parameters = []
+    date = datetime.now().strftime("%d %b %Y")
+    time = datetime.now().strftime("%l:%M %p")
     parameters.append(flask.request.args.get('temp'))
     parameters.append(flask.request.args.get('hr'))
     parameters.append(flask.request.args.get('bmi'))
+    uuid = flask.request.args.get('uuid')
     if parameters[0] :
         inputFeature = np.asarray(parameters).reshape(1, 3)
         with graph.as_default():
@@ -53,11 +56,13 @@ def pistore():
         score = str(raw_prediction)
     else:
         score = 0
-    doc_ref = db.collection(u'users').document(u'alovelace')
-    doc_ref.set({
-        u'first': u'Ada',
-        u'last': u'Lovelace',
-        u'born': 1815
+    doc_ref = db.collection(u'user').document(uuid).collection(u'sensordata')
+    doc_ref.add({
+        u'temp': parameters[0],
+        u'hr': parameters[1],
+        u'date': date,
+        u'time': time,
+        u'score': score
     })
     return 'valid'
     
