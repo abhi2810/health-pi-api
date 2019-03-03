@@ -41,7 +41,7 @@ def homepage():
     """.format(time=the_time)
 
 @app.route("/pistore", methods=["GET","POST"])
-def predict():
+def pistore():
     parameters = []
     parameters.append(flask.request.args.get('temp'))
     parameters.append(flask.request.args.get('hr'))
