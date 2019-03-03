@@ -58,11 +58,11 @@ def pistore():
         score = 0
     doc_ref = db.collection(u'user').document(uuid).collection(u'sensordata')
     doc_ref.add({
-        u'temp': parameters[0],
-        u'hr': parameters[1],
+        u'temp': float(parameters[0]),
+        u'hr': float(parameters[1]),
         u'date': date,
         u'time': time,
-        u'score': score
+        u'score': float(score)
     })
     return 'valid'
     
