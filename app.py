@@ -29,9 +29,8 @@ def init():
 
 @app.route('/')
 def homepage():
-    the_time = datetime.now()
     timezone = pytz.timezone("Asia/Kolkata")
-    d_aware = timezone.localize(the_time).strftime("%A, %d %b %Y %l:%M %p")
+    the_time = datetime.now(timezone).strftime("%A, %d %b %Y %l:%M %p")
     return """
     <h1>Hello Bro!</h1>
     <p>It is currently {time}.</p>
@@ -40,7 +39,7 @@ def homepage():
     You'll get a json with the healthscore.</p>
     <p>BTW, Enjoy this picture of a cat.</p>
     <img src="http://loremflickr.com/600/400" />
-    """.format(time=d_aware)
+    """.format(time=the_time)
 
 @app.route("/pistore", methods=["GET","POST"])
 def pistore():
