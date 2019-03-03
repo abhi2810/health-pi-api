@@ -18,6 +18,9 @@ cred = credentials.Certificate('cred/healthmeter-b5ac6-da53f53b29bb.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+
+timezone = pytz.timezone("Asia/Kolkata")
+
 def init():
     global model,graph
     # load the pre-trained Keras model
@@ -29,7 +32,6 @@ def init():
 
 @app.route('/')
 def homepage():
-    timezone = pytz.timezone("Asia/Kolkata")
     the_time = datetime.now(timezone).strftime("%A, %d %b %Y %l:%M %p")
     return """
     <h1>Hello Bro!</h1>
@@ -44,8 +46,8 @@ def homepage():
 @app.route("/pistore", methods=["GET","POST"])
 def pistore():
     parameters = []
-    date = datetime.now().strftime("%d %b %Y")
-    time = datetime.now().strftime("%l:%M %p")
+    date = datetime.now(timezone).strftime("%d %b %Y")
+    time = datetime.now(timezone).strftime("%l:%M %p")
     parameters.append(flask.request.args.get('temp'))
     parameters.append(flask.request.args.get('hr'))
     parameters.append(flask.request.args.get('bmi'))
